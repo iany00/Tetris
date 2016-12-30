@@ -10,17 +10,77 @@
  *
  * Created on December 12, 2016, 11:50 PM
  */
-
 #ifndef GAMERULES_H
 #define GAMERULES_H
+#include "Shapes.h"
+#include "Score.h"
+#include "Context.h"
+
+enum MARK{
+	GAME_STOP = -1,
+	GAME_PAUSE = 0,
+	GAME_RUN = 1
+};
+
+using namespace std;
+
+
 
 class GameRules {
-public:
-    GameRules();
-    GameRules(const GameRules& orig);
-    virtual ~GameRules();
-private:
+    private:
+        int m_penal[24][17];
+        color m_color[24][17];
+        Context* m_graph;
 
+        Score s;
+
+        Context* nextGraph;
+        MARK mark;
+
+    public:
+        int x;
+        int y;
+
+    private:
+
+        bool recoverPenal();
+
+        bool isAttachBottom();
+
+        bool isAttachLeft();
+
+        bool isAttachRight();
+
+        char getShape();
+
+        bool setPenal();
+
+        bool erasePenal();
+    public:
+        GameRules();
+
+        ~GameRules();
+
+
+        void createCube();
+
+        void move(int dir);
+
+        void roll();
+
+        void stop();
+
+        void erase();
+
+        void down(int level);
+
+        void printNextCube(Context* m_graph);
+        void gameInit();
+
+        MARK getMark();
+        void setMark( MARK );
+
+        void printHelp();
 };
 
 #endif /* GAMERULES_H */
