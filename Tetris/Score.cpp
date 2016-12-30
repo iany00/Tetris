@@ -12,13 +12,33 @@
  */
 
 #include "Score.h"
+#include "cur.h"
+#include "Shapes.h"
 
-Score::Score() {
+void Score::printMessage()
+{
+   Cur c;
+   Shapes p;
+
+   p.setLocate(2,19);
+   p.setColor(WHITE);
+   p.printPoint();
+   
+   c.saveCur();
+   c.moveCur(2,21);
+   cout<<"player: "<<player;
+   c.resumeCur();
+
+   p.setLocate(4,19);
+   p.setColor(GREEN);
+   p.printPoint();
+
+   c.saveCur();
+   c.moveCur(4,21);
+   cout<<"score : "<<score;
+   c.resumeCur();
 }
 
-Score::Score(const Score& orig) {
-}
 
 Score::~Score() {
 }
-

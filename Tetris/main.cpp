@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
 	
     g.gameInit();
      
-    pthread_create(&t1,NULL,NULL,(void*)(&g)); // TODO adauga listen keyboard
+    //pthread_create(&t1,NULL,NULL,(void*)(&g)); // TODO adauga listen keyboard
 
     while(1)
     {

@@ -6,7 +6,7 @@
 
 /* 
  * File:   Score.h
- * Author: Iany
+ * Author: Ionut Airinei
  *
  * Created on December 30, 2016, 3:25 PM
  */
