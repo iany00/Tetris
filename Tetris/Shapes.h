@@ -45,6 +45,7 @@ class Shapes {
             x = 0;
             y = 0;
         }
+        
         Shapes(int a,int b,int c)
         {
                 color = a;

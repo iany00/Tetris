@@ -30,7 +30,7 @@ void Score::printMessage()
    c.resumeCur();
 
    p.setLocate(4,19);
-   p.setColor(GREEN);
+   p.setColor(YELLOW);
    p.printPoint();
 
    c.saveCur();

@@ -19,20 +19,16 @@
 #include <semaphore.h>
 
 
-pthread_mutex_t	mutex_lock;
-#define SPEED 500000
+//pthread_mutex_t	mutex_lock;
+#define SPEED 500000 // 0.5
 
 
 /*
  * MAIN
  */
 int main(int argc, char** argv) {
-
-    pthread_t t1;
-
-    pthread_mutex_init(&mutex_lock, NULL);
 	
-    system("clear");
+    system("clear"); //todo
     
     // set game
     GameRules g;
@@ -44,10 +40,10 @@ int main(int argc, char** argv) {
 
     while(1)
     {
-//        fflush(stdout);
-//        usleep(SPEED);
-//        g.move(DOWN);        
+        fflush(stdout);
+        usleep(SPEED);
+        g.move(DOWN);        
     }
-	return 0;
+    return 0;
 }
 

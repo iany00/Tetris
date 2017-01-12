@@ -25,14 +25,13 @@ enum MARK{
 using namespace std;
 
 
-
 class GameRules {
     private:
-        int m_penal[24][17];
+        int m_panel[24][17];
         color m_color[24][17];
         Context* m_graph;
 
-        Score s;
+        Score score;
 
         Context* nextGraph;
         MARK mark;
@@ -53,9 +52,9 @@ class GameRules {
 
         char getShape();
 
-        bool setPenal();
+        bool setPanel();
 
-        bool erasePenal();
+        bool erasePanel();
     public:
         GameRules();
 
