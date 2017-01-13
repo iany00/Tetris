@@ -1,7 +1,4 @@
-Exception: STATUS_ACCESS_VIOLATION at eip=00000000
-eax=0063BF20 ebx=200659F8 ecx=200659F7 edx=00000000 esi=20065A5C edi=FFEAFFE8
-ebp=00000000 esp=FFEACE0C program=C:\Users\Iany\Documents\GitHub\Tetris\Tetris\dist\Debug\Cygwin_1-Windows\tetris.exe, pid 1588, thread unknown (0x16A8)
-cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
 Stack trace:
 Frame     Function  Args
-End of stack trace
+0063ADE8  6101E1CA (000001F0, 0000EA60, 000000A4, 0063AE58)
+0063AF18  610E3BBF (00000000, 00000001, 6121CBC0, 00000000)

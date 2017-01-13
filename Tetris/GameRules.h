@@ -80,6 +80,7 @@ class GameRules {
         void setMark( MARK );
 
         void printHelp();
+        
 };
 
 #endif /* GAMERULES_H */

@@ -11,38 +11,38 @@
  * Created on December 12, 2016, 11:15 PM
  */
 #include "GameRules.h"
+#include "Score.h"
 #include <iostream>
 #include <cstring>
 #include<cstdio>
-#include<pthread.h>
+//#include<pthread.h>
 #include <unistd.h>
 #include <semaphore.h>
 
 
-//pthread_mutex_t	mutex_lock;
 #define SPEED 500000 // 0.5
 
-
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
 /*
  * MAIN
  */
 int main(int argc, char** argv) {
-	
+
     system("clear"); //todo
     
     // set game
-    GameRules g;
-    //g.createCube();
+    GameRules start;
 	
-    g.gameInit();
+    start.gameInit();
      
-    //pthread_create(&t1,NULL,NULL,(void*)(&g)); // TODO adauga listen keyboard
-
     while(1)
     {
         fflush(stdout);
         usleep(SPEED);
-        g.move(DOWN);        
+        start.move(DOWN);
     }
     return 0;
 }

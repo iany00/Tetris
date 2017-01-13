@@ -21,7 +21,8 @@
 //  compiler dependent
 #define PENAL_SIZE (17*24*sizeof(int))
 #define CUBE_SIZE (3*3*sizeof(int))
-pthread_mutex_t	mutex_lock;
+
+pthread_mutex_t	mutex_lock;//
 
 static int stop_flag;
 
@@ -122,14 +123,55 @@ void GameRules::printHelp()
         c.resumeCur();
 }
 
+void* listenKey(void *ptr)
+{
+    //TODO use arrows. How do i get char key?
+    GameRules* ptrg = (GameRules*)ptr;
+    char key;
+    while(1)
+    {
+        //line setting; erase input char
+        system("stty -icanon -echo"); 
+        key = getchar();
+        system("stty icanon echo");
+        switch(key)
+        {
+            case 'a':
+                ptrg->move(LEFT);break;
+            case 'd':
+                ptrg->move(RIGHT);break;
+            case 'w':
+                ptrg->roll();break;
+            case 's':
+                
+                while(1)
+                {
+                    if(stop_flag == 1)
+                    {
+                        stop_flag = 0;
+                        break;
+                    }
+                    ptrg->move(DOWN);
+                }
+                break;
 
+            case 'p':
+		if(GAME_RUN == ptrg->getMark())
+                    ptrg->setMark(GAME_PAUSE);
+		else 
+                    ptrg->setMark(GAME_RUN);
+                break;
+
+            default:
+                break;
+        }
+    }
+}
 void GameRules::gameInit()
 {
         pthread_t t1;
-
         pthread_mutex_init(&mutex_lock, NULL);
-        
-        //pthread_create(&t1,NULL,listenKey,(void*)(&g));
+        pthread_create(&t1,NULL, listenKey, this);
         
 	printHelp();
 
@@ -167,7 +209,7 @@ void GameRules::move(int dir)
     
     erasePanel();
     
-    //todo
+    
     pthread_mutex_lock(&mutex_lock);
     
     switch(dir)
@@ -217,6 +259,7 @@ void GameRules::move(int dir)
         default:
             break;
     }
+    
     pthread_mutex_unlock(&mutex_lock);
 }
 
@@ -234,7 +277,7 @@ bool GameRules::erasePanel()
     // get the binary block.. the current one
     memcpy(block, m_graph->getArray() ,CUBE_SIZE);
     
-    // erace all trace
+    // erase all trace
     for(i = 0; i < 3; i++)
         for(j = 0; j < 3; j++)
         {
@@ -366,7 +409,7 @@ bool GameRules::setPanel()
             if(m_panel[i][j] > 1)
             {
                 cout<<"game over"<<endl;
-                //todo
+                
                 system("stty icanon echo");
                 exit(0);
             }
@@ -524,46 +567,4 @@ MARK GameRules::getMark()
 void GameRules::setMark( MARK mark )
 {
 	this->mark = mark;
-}
-
-void* listenKey(void *ptr)
-{
-    GameRules* ptrg = (GameRules*)ptr;
-    char key;
-    while(1)
-    {
-        system("stty -icanon -echo");
-        key = getchar();
-        system("stty icanon echo");
-        switch(key)
-        {
-            case 'a':
-                ptrg->move(LEFT);break;
-            case 'd':
-                ptrg->move(RIGHT);break;
-            case 'w':
-                ptrg->roll();break;
-            case 's':
-                
-                while(1)
-                {
-                    if(stop_flag == 1)
-                    {
-                        stop_flag = 0;
-                        break;
-                    }
-                    ptrg->move(DOWN);
-                }
-                break;
-
-            case 'p':
-		if(GAME_RUN == ptrg->getMark())
-			ptrg->setMark(GAME_PAUSE);
-		else ptrg->setMark(GAME_RUN);
-                break;
-
-            default:
-                break;
-        }
-    }
 }
